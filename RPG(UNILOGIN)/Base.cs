@@ -8,25 +8,23 @@ namespace RPG_UNILOGIN_
 {
     internal abstract class Base
     {
-        string _Name;
-        int _HP;
-        int _XP;
+        public string Name { get; set; }
+        public int HP { get; set; }
+        public int XP { get; set; }
 
-        string Name { get { return _Name; } set { _Name = value; } }
-        int HP { get { return _HP; } set { _HP = value; } }
-        int XP { get { return _XP; } set { _XP = value; } }
-
-        public void Attack()
+        public virtual void Attack()
         {
-
+            throw new NotImplementedException("Attack method must be implemented in subclasses");
         }
-        public void Damage()
-        {
 
+        public virtual void Damage(int amount)
+        {
+            throw new NotImplementedException("Damage method must be implemented in subclasses");
         }
-        public void IsDead()
-        {
 
+        public virtual bool CheckIfDead()
+        {
+            throw new NotImplementedException("CheckIfDead method must be implemented in subclasses");
         }
     }
 }
