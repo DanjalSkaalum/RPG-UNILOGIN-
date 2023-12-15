@@ -10,7 +10,7 @@ namespace RPG_UNILOGIN_
 {
     internal class Player : Base
     {
-        public PlayerClass Class { get; set; }
+        public PlayerClass PClass { get; set; }
         public PlayerRace Race { get; set; }
 
         // An enum for the Player's arbitrary class choice
@@ -39,12 +39,14 @@ namespace RPG_UNILOGIN_
 
         }
         // Constructor for making a Player Character
-        public Player(string name, int hp, int xp, int level, PlayerClass playerClass, PlayerRace race)
+        public Player(string name, int hp, int xp, int level, PlayerClass pClass, PlayerRace race)
         {
             Name = name;
             HP = hp;
             XP = xp;
             Level = level;
+            PClass = pClass; 
+            Race = race;
             Equipment = new List<Equipment>();
         }
 
