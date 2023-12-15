@@ -10,6 +10,7 @@ namespace RPG_UNILOGIN_
     {
         public NPCType Type { get; set; }
 
+        // An enum for the NPC's arbitrary NPC type choice
         public enum NPCType
         {
             Enemy,
@@ -18,19 +19,50 @@ namespace RPG_UNILOGIN_
             Monster
         }
 
-        public NPC(string name, NPCType npcType, int hp)
+        // Properties for the NPC
+        int DamageDone;
+
+        // Constructor for making a Non-Playable Character
+        public NPC(string name, NPCType npcType, int hp, int damageDone)
         {
             Name = name;
             Type = npcType;
             HP = hp;
+            DamageDone = damageDone;
         }
 
-        public override void Attack()
+        // Method for the NPC's attacks
+        public override void Attack(Base target)
         {
             // Implement NPC attack logic
-            Console.WriteLine($"{Name} attacks.");
+            if (!CheckIfDead())
+            {
+                if (target is Player playerTarget)
+                {
+                    int totalDamage = CalculateTotalDamage();
+
+                    // // Informs of the NPC's target and damage
+                    Console.WriteLine($"{Name} attacks {playerTarget.Name} with {totalDamage} damage!");
+
+                    // Applies damage to targeted Player
+                    playerTarget.Damage(totalDamage);
+                }
+                else
+                {
+                    // Informs of anti-EVE limitations
+                    Console.WriteLine($"{Name} can only attack players.");
+                }
+            }
         }
 
+        // Method for calulating the NPC's damage output
+        private int CalculateTotalDamage()
+        {
+            // Returns the NPC's set damage
+            return DamageDone;
+        }
+
+        // Method for the NPC taking damage
         public override void Damage(int amount)
         {
             // Implement NPC damage logic
@@ -45,9 +77,10 @@ namespace RPG_UNILOGIN_
             }
         }
 
+        // Bool check for NPC death
         public override bool CheckIfDead()
         {
-            // Implement NPC death logic
+            // Returns bool value, true if dead, false if otherwise
             return HP <= 0;
         }
     }

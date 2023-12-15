@@ -8,11 +8,13 @@ namespace RPG_UNILOGIN_
 {
     internal abstract class Base
     {
+        // Properties for Inheritance
         public string Name { get; set; }
         public int HP { get; set; }
         public int XP { get; set; }
 
-        public virtual void Attack()
+        // Methods for inheritance
+        public virtual void Attack(Base target)
         {
             throw new NotImplementedException("Attack method must be implemented in subclasses");
         }
